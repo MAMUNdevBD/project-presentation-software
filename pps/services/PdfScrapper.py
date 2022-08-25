@@ -9,8 +9,6 @@ class PdfScrapper:
 
     @staticmethod
     def readFile(fname, pages=None):
-        # fname = "E:/sideproject/versity/pps/assets/pdf/50238.pdf"
-
         if not pages:
             pagenums = set()
         else:
@@ -24,9 +22,12 @@ class PdfScrapper:
 
         for page in PDFPage.get_pages(infile, pagenums):
             interpreter.process_page(page)
+
         infile.close()
         converter.close()
+
         text = output.getvalue()
+
         output.close
 
         return text
@@ -44,6 +45,5 @@ class PdfScrapper:
             s = re.search("https://github\S+", txt)
             data["git"] = s.group()
 
-        print(data)
         return data
         
