@@ -4,6 +4,7 @@ import os
 class GitController:
     
     @staticmethod
-    def clone():
-        git.Git("projects").clone("https://github.com/MAMUNdevBD/project-presentation-software.git")
+    def clone(url):
+        git.Git("projects").clone(url)
     
+GitController.clone("https://github.com/Wa316082/uvproject")

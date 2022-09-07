@@ -46,4 +46,4 @@ class PdfScrapper:
             data["git"] = s.group()
 
         return data
-        
+    

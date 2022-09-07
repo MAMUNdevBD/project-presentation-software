@@ -14,8 +14,10 @@ class PyBuddy:
             subprocess.check_call([sys.executable, "-m", "pip", "install", dep])
 
     def runProject(path, root):
-        call(["python", "projects/project-presentation-software/main.py"])
+        call(["python", f"{path+root}.py", "runserver"])
 
-# PyBuddy.installDependencies(PyBuddy.scrapDependencies("projects/project-presentation-software"))
+print(PyBuddy.scrapDependencies("projects/uvproject"))
 
-PyBuddy.runProject("projects/project-presentation-software/", 'a')
+# PyBuddy.installDependencies(PyBuddy.scrapDependencies("projects/uvproject"))
+
+PyBuddy.runProject("projects/uvproject/", 'manage')
