@@ -1,6 +1,8 @@
 from pathlib import Path
 import random
+import shutil
 import requests
+from git import rmtree
 
 class FileManager:
 
@@ -17,3 +19,7 @@ class FileManager:
     def renameFile(file, newName):
         newFile = file+newName
         Path(file).rename(newFile)
+
+    def removeFolder(path):
+        rmtree(path)
+        shutil.rmtree(path,ignore_errors=True)

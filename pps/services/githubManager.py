@@ -1,10 +1,16 @@
-import git
-import os 
 
-class GitController:
+from git import RemoteProgress
+from tqdm import tqdm
+
+
+class GitController(RemoteProgress):
+    def __init__(self):
+        super().__init__()
+        self.pbar = tqdm()
+
+    def update(self, op_code, cur_count, max_count=None, message=''):
+        self.pbar.total = max_count
+        self.pbar.n = cur_count
+        self.pbar.refresh()
+        
     
-    @staticmethod
-    def clone(url):
-        git.Git("projects").clone(url)
-    
-GitController.clone("https://github.com/Wa316082/uvproject")

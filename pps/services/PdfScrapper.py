@@ -18,7 +18,7 @@ class PdfScrapper:
         manager = PDFResourceManager()
         converter = TextConverter(manager, output, laparams=LAParams())
         interpreter = PDFPageInterpreter(manager, converter)
-        infile = open(f"./assets/pdf/{fname}.pdf", 'rb')
+        infile = open(fname, 'rb')
 
         for page in PDFPage.get_pages(infile, pagenums):
             interpreter.process_page(page)

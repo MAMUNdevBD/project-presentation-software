@@ -2,6 +2,7 @@ from pipreqs.pipreqs import get_all_imports
 import subprocess
 import sys
 from subprocess import call
+import pip
 
 class PyBuddy:
 
@@ -11,13 +12,21 @@ class PyBuddy:
         
     def installDependencies(deps):
         for dep in deps:
-            subprocess.check_call([sys.executable, "-m", "pip", "install", dep])
+                if hasattr(pip, 'main'):
+                    pip.main(['install', dep])
+                else:
+                    pip._internal.main(['install', dep])
+            # subprocess.check_call([sys.executable, "-m", "pip3", "install", dep])
+        return True
 
-    def runProject(path, root):
-        call(["python", f"{path+root}.py", "runserver"])
+    def runProject(path, pyfile, django=False):
+        if django:
+            call(["python", f"{path}/{pyfile}", "runserver"])
+        else:
+            call(["python", f"{path}/{pyfile}"])
 
-print(PyBuddy.scrapDependencies("projects/uvproject"))
+# print(PyBuddy.scrapDependencies("projects/uvproject"))
 
 # PyBuddy.installDependencies(PyBuddy.scrapDependencies("projects/uvproject"))
 
-PyBuddy.runProject("projects/uvproject/", 'manage')
+# PyBuddy.runProject("projects/uvproject/", 'manage')
