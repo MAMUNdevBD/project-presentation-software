@@ -34,8 +34,8 @@ class GitScreen(Frame):
 
     def installDependencies(self):
         self.pb['value'] = 0
-        deps = PyBuddy.scrapDependencies(self.d['project_path'])
-        PyBuddy.installDependencies(deps)
+        self.deps = PyBuddy.scrapDependencies(self.d['project_path'])
+        PyBuddy.installDependencies(self.deps)
         self.pb['value'] = 100
         self.installDep.pack_forget()
         os.chdir(self.d['project_path']+"/source")
