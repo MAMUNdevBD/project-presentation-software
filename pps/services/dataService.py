@@ -1,9 +1,10 @@
-import json
+import json, os
 
 
 class DataService:
     def __init__(self) -> None:
-        self.filePath = "pps/storage/data.caz"
+        cwd = os.getcwd()
+        self.filePath = cwd+"/pps/storage/data.caz"
 
     def getAllData(self):
         f = open(self.filePath, "r")
@@ -15,4 +16,4 @@ class DataService:
         json_object = json.dumps(data, indent=4)
         f = open(self.filePath,"w")
         f.write(json_object)
-        f.close()      
+        f.close()

@@ -1,5 +1,8 @@
 {
     "project_path": "E:/deletable/project",
     "id": "2118cse50238",
-    "git": "https://github.com/MAMUNdevBD/project-presentation-software"
+    "git": "https://github.com/Wa316082/uvproject",
+    "dependencies": [
+        "django"
+    ]
 }

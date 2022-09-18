@@ -1,10 +1,10 @@
 from tkinter.ttk import Progressbar
 import git, glob, os
 from tkinter import Button, Frame, Label
-from services.pyBuddy import PyBuddy
-from services.fileManagement import FileManager
-from services.dataService import DataService
-from services.githubManager import GitController
+from pps.services.pyBuddy import PyBuddy
+from pps.services.fileManagement import FileManager
+from pps.services.dataService import DataService
+from pps.services.githubManager import GitController
 
 
 class GitScreen(Frame):
@@ -21,16 +21,17 @@ class GitScreen(Frame):
         
         self.installDep = Button(self, text="Install Dependencies", command=lambda: self.installDependencies())
 
-        self.lb = Label(self, text="Select your main file to run")
-
         self.cloneB = Button(self, text="Proceed Cloning Repository", command=lambda: self.cloneGit())
         self.cloneB.pack()
         self.pb = Progressbar(self, orient='horizontal', length=100, mode="determinate")
         self.pb.pack(pady=20)
 
-    def runCodes(self, file):
+    def runCodes(self, file=None, k=0):
         print(file)
-        PyBuddy.runProject(self.d['project_path']+"/source", file)
+        if file:
+            PyBuddy.runProject(self.d['project_path']+"/source", file)
+        else:
+            PyBuddy.runProject(self.d['project_path']+"/source", file, django=True)
 
     def installDependencies(self):
         self.pb['value'] = 0
@@ -38,13 +39,20 @@ class GitScreen(Frame):
         PyBuddy.installDependencies(self.deps)
         self.pb['value'] = 100
         self.installDep.pack_forget()
-        os.chdir(self.d['project_path']+"/source")
-        for file in glob.glob("*.py"):
+        # os.chdir(self.d['project_path']+"/source")
+        for file in glob.glob(self.d['project_path']+"/source/*.py"):
             self.files.append(file)
-        self.lb.pack()
-        for file in self.files:
-            self.runCode = Button(self, text=file, command=lambda: self.runCodes(file))
-            self.runCode.pack(pady=50)
+        Label(self, text="Dependencies used in this project").pack()
+        self.d.update({"dependencies": self.deps})
+        DataService().saveData(self.d)
+        for dep in self.deps:
+            Label(self, text=dep).pack()
+        if "django" in self.deps:
+            Button(self, text="Run The Project", command=lambda: self.runCodes()).pack(pady=5)
+        else:
+            Label(self, text="Select your main file to run").pack()
+            for i in range(len(self.files)):
+                Button(self, text=self.files[i], command=lambda i=i: self.runCodes(self.files[i])).pack(pady=5)
 
 
     def cloneComplete(self):

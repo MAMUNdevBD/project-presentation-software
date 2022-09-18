@@ -1,7 +1,6 @@
 from pipreqs.pipreqs import get_all_imports
 import subprocess
 import sys
-from subprocess import call
 import pip
 
 class PyBuddy:
@@ -21,9 +20,9 @@ class PyBuddy:
 
     def runProject(path, pyfile, django=False):
         if django:
-            call(["python", f"{path}/{pyfile}", "runserver"])
+            subprocess.run(["python", f"{path}/manage.py", "runserver"], shell=True)
         else:
-            call(["python", f"{path}/{pyfile}"])
+            subprocess.run(["python", f"{path}/{pyfile}"])
 
 # print(PyBuddy.scrapDependencies("projects/uvproject"))
 

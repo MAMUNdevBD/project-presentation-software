@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import IntVar, ttk
-from screens.GitScreen import GitScreen
+from pps.screens.GitScreen import GitScreen
 
-from screens.MainScreen import MainScreen
+from pps.screens.MainScreen import MainScreen
 
 class windows(tk.Tk):
     def __init__(self, *args, **kwargs):

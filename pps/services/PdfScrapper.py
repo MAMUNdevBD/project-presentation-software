@@ -25,18 +25,13 @@ class PdfScrapper:
 
         infile.close()
         converter.close()
-
         text = output.getvalue()
-
         output.close
-
         return text
 
     def getData(txt, *keys):
         # "2118\w+"gm
-        
         data = {}
-
         if 'stId' in keys:
             s = re.search("2118\w+", txt)
             data["id"] = s.group()

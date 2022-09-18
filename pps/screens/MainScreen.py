@@ -2,11 +2,11 @@ from glob import glob
 import tkinter as tk
 import json
 from tkinter import Button, Frame, Label, filedialog
-from services.dataService import DataService
-from services.PdfScrapper import PdfScrapper
+from pps.services.dataService import DataService
+from pps.services.PdfScrapper import PdfScrapper
 # from services.dataService import DataService
 
-from screens.GitScreen import GitScreen
+from pps.screens.GitScreen import GitScreen
 
 class MainScreen(Frame):
 
