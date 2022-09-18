@@ -41,7 +41,7 @@ class GitScreen(Frame):
         self.installDep.pack_forget()
         # os.chdir(self.d['project_path']+"/source")
         for file in glob.glob(self.d['project_path']+"/source/*.py"):
-            self.files.append(file)
+            self.files.append(os.path.basename(file))
         Label(self, text="Dependencies used in this project").pack()
         self.d.update({"dependencies": self.deps})
         DataService().saveData(self.d)
@@ -62,5 +62,7 @@ class GitScreen(Frame):
 
     def cloneGit(self):
         self.d = DataService().getAllData()
-        FileManager.removeFolder(self.d['project_path']+"/source")
+        isExist = os.path.exists(self.d['project_path']+"/source")
+        if isExist:
+            FileManager.removeFolder(self.d['project_path']+"/source")
         git.Repo.clone_from(self.d['git'], self.d['project_path']+"/source", progress=self.cloneComplete())

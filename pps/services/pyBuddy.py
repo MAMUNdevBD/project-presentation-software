@@ -20,7 +20,7 @@ class PyBuddy:
 
     def runProject(path, pyfile, django=False):
         if django:
-            subprocess.run(["python", f"{path}/manage.py", "runserver"], shell=True)
+            subprocess.call(["python", f"{path}/manage.py", "runserver"])
         else:
             subprocess.run(["python", f"{path}/{pyfile}"])
 

@@ -16,4 +16,4 @@ class DataService:
         json_object = json.dumps(data, indent=4)
         f = open(self.filePath,"w")
         f.write(json_object)
-        f.close()
+        f.close()      

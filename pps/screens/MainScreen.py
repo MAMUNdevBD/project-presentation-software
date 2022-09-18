@@ -41,6 +41,7 @@ class MainScreen(Frame):
             d = PdfScrapper.getData(PdfScrapper.readFile(pdf), "stId", "github")
             data.update(d)
             DataService().saveData(data)
+        
 
         
 
